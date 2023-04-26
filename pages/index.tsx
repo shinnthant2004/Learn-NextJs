@@ -33,6 +33,9 @@ export default Home
 
 export async function getStaticProps () {
 
+  console.log("revalidated");
+  
+
   const filePath = path.join(process.cwd(),"data","products.json");
   
   const jsonData:any = await fs.readFile(filePath);
@@ -42,6 +45,7 @@ export async function getStaticProps () {
   return {
     props:{
       data,
-    }
+    },
+    revalidate:1
   }
 }
