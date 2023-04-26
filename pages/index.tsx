@@ -1,13 +1,28 @@
 import path from "path"
 import { cwd } from "process"
 import fs from "fs/promises"
+import Link from "next/link";
 
-const Home = ({products}:any) => {
+export interface IProduct {
+  id:number;
+  name:string;
+  description:string;
+}
+
+interface IProps {
+  data: {
+    products:IProduct[]
+  }
+}
+
+const Home = (props:IProps) => {
+  const {data:{products}} = props;  
+  
   return (
     <div>
       {
-        products.map((item:any,index:number)=>{
-          return <p key={index}>{item.name}</p>
+       products && products.map((item:any,index:number)=>{
+          return <Link style={{display:"block"}} href={`${item.id}`} key={index}>{item.name}</Link>
         })
       }
     </div>
@@ -22,13 +37,11 @@ export async function getStaticProps () {
   
   const jsonData:any = await fs.readFile(filePath);
 
-  // console.log(data);
   const data = JSON.parse(jsonData);
   
-
   return {
     props:{
-      products:data
+      data,
     }
   }
 }
