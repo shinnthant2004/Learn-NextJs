@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import useSWR from 'swr'
 
 interface IProps {
@@ -5,14 +6,30 @@ interface IProps {
 }
 
 const Sales = (props:IProps) => {
-    const {sales} = props;
+    const {sales:serverData} = props;
+
+    const [localData,setLocalData] = useState(serverData)
+    const {data,error,isLoading} = useSWR("https://next-learn-c1220-default-rtdb.firebaseio.com/sales.json");    
+    
+    useEffect(()=>{
+
+       if(data){
+        const transformedData = Object.keys(data).map((item)=>{
+            return {
+               id: data[item].id,
+               name:data[item].name
+            }
+          });
+        setLocalData(transformedData)
+       }   
+    },[data])
     
     return (
         <div>
             {
-                sales.map((sale)=>{
+                localData.map((sale,index)=>{
                     return (
-                        <p key={sale.id}>{sale.name}</p>
+                        <p key={index}>{sale.name}</p>
                     )
                 })
             }
