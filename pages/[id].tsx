@@ -22,14 +22,8 @@ export async function getStaticPaths(params:any) {
             {
                 params:{id:"1"}
             },
-            {
-                params:{id:"2"}
-            },
-            {
-                params:{id:"3"}
-            },
         ],
-        fallback:false
+        fallback: "blocking"
     }
 }  
 
