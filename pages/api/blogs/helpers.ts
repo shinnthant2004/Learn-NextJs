@@ -7,16 +7,16 @@ export const defineFilePath = () => {
 }
 
 export const extractData = async (filePath:string) => {
-    const fileData:any = await fs.readFile(filePath);     
+    const fileData:any = await fs.readFile(filePath);   
+      
     const data = JSON.parse(fileData);   
 
-    const blogObj = data.blogs;
         
-    const formattedData = Object.keys(blogObj).map((item)=>{
+    const formattedData = data.map((item:any)=>{
         return {
-            id: blogObj[item].id,
-            name: blogObj[item].name,
-            description: blogObj[item].description,
+            id: item.id,
+            name: item.name,
+            description: item.description,
         }
     })    
     

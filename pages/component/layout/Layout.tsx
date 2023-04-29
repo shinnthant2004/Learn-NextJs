@@ -18,6 +18,9 @@ const Layout = (props:IProps) => {
                     <p onClick={()=>{
                         router.push("/blogs")
                     }} className="ml-5 cursor-pointer">Blogs</p>
+                    <p onClick={()=>{
+                        router.push("/blogs/create")
+                    }} className="ml-5 cursor-pointer">Create</p>
                 </nav>
             </div>
             <div className="p-5">

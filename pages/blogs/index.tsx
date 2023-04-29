@@ -16,7 +16,7 @@ const Blogs = (props:IProps) => {
   return (
     <div>
       {
-        blogs.map((blog)=>{
+        blogs?.map((blog)=>{
           return (
             <div key={blog.id}>
               <p onClick={()=>{
@@ -31,15 +31,15 @@ const Blogs = (props:IProps) => {
   )
 }
 
-export async function getStaticProps(){
+export async function getStaticProps(){  
   // should not use fetch API when u want to use your own API inside next
   const filePath = defineFilePath();
   const data = await extractData(filePath);
   
   return {
     props:{
-      blogs:data
-    }
+      blogs:data,
+    },
   }
 }
 

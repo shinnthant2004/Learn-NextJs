@@ -34,7 +34,7 @@ export async function getStaticPaths(){
     const filePath = defineFilePath()
     const data = await extractData(filePath);
 
-    const params = data.map((blog)=>{
+    const params = data.map((blog:any)=>{
         return {
            params:{
              id:blog.id.toString()
@@ -54,7 +54,7 @@ export async function getStaticProps(context:any){
     const filePath = defineFilePath()
     const data = await extractData(filePath);
 
-    const blog = data.find((blog)=>{
+    const blog = data.find((blog:any)=>{
         return blog.id == id
     })    
 
