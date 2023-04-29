@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import { Fragment } from "react"
 
 interface IProps {
@@ -5,13 +6,18 @@ interface IProps {
 }
 
 const Layout = (props:IProps) => {
+    const router = useRouter()
     return (
        <Fragment>
         <div className="w-screen h-screen">
             <div>
                 <nav className="w-full p-4 flex m-h-[50px] bg-gray-200">
-                    <p>Home</p>
-                    <p className="ml-5">Blogs</p>
+                    <p className="cursor-pointer" onClick={()=>{
+                        router.push("/")
+                    }} >Home</p>
+                    <p onClick={()=>{
+                        router.push("/blogs")
+                    }} className="ml-5 cursor-pointer">Blogs</p>
                 </nav>
             </div>
             <div className="p-5">
